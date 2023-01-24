@@ -1,2 +1,7 @@
 Today, I have learnt about SQL injection and its types. 
 With these, I also performed a hands-on lab on "Retrieving hidden data" and "Subverting application logic".
+
+1) In first lab, the idea was to comment all the rest of the sql query and just focus on the name and its always true statement. 
+   And that was: '+or+1=1
+
+2) Here, we subverted the query as: we didn't knew the password so we just entered the administer'-- and that was all to do.

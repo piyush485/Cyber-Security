@@ -1,0 +1,2 @@
+Today, I have learnt about SQL injection and its types. 
+With these, I also performed a hands-on lab on "Retrieving hidden data" and "Subverting application logic".

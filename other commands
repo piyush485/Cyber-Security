@@ -1,0 +1,7 @@
+1)
+to get the version of the database from the sql query is:
+SELECT * FROM v$version    (only for Oracle)
+
+2)
+to get the list of the table
+SELECT * FROM INFORMATION_SCHEMA.TABLES

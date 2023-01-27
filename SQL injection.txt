@@ -56,3 +56,5 @@ Day-3
     - the above query provides us the username and password column names.
     - '+union+select+USERNAME_GMVJPI,PASSWORD_MYTJBV+from+USERS_DWZGPO--
     - form the above command we got the admin id and password.
+
+Day-4

